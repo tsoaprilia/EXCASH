@@ -83,26 +83,44 @@ export const getProductsPages = async (query: string) =>{
 
 
 
-  
-  export const getTransactionRecords = async () => {
-    try {
+export const getTransactionRecords = async () => {
+  try {
       const transactions = await prisma.transactionRecord.findMany({
-        include: {
-          transactionDetails: {
-            include: {
-              product: true,
-            },
+          include: {
+              transactionDetails: {
+                  include: {
+                      product: true,
+                  },
+              },
           },
-        },
       });
       return transactions.map(transaction => ({
-        ...transaction,
-        total: transaction.transactionDetails.reduce((acc, item) => acc + item.quantity * item.price, 0),
+          ...transaction,
+          total: transaction.transactionDetails.reduce((acc, item) => acc + item.quantity * item.price, 0),
       }));
-    } catch (error) {
+  } catch (error) {
       throw new Error("Failed to fetch transaction records");
-    }
-  };
+  }
+};
+  // export const getTransactionRecords = async () => {
+  //   try {
+  //     const transactions = await prisma.transactionRecord.findMany({
+  //       include: {
+  //         transactionDetails: {
+  //           include: {
+  //             product: true,
+  //           },
+  //         },
+  //       },
+  //     });
+  //     return transactions.map(transaction => ({
+  //       ...transaction,
+  //       total: transaction.transactionDetails.reduce((acc, item) => acc + item.quantity * item.price, 0),
+  //     }));
+  //   } catch (error) {
+  //     throw new Error("Failed to fetch transaction records");
+  //   }
+  // };
 
 //dashboard
 export const getProductMetrics = async () => {
@@ -120,4 +138,16 @@ export const getProductMetrics = async () => {
     }
   };
   
-  
+  export const getTransactionMetrics = async () => {
+    try {
+      const response = await fetch('/api/getTransactionMetrics');
+      if (!response.ok) {
+        throw new Error('Failed to fetch transaction metrics');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Failed to fetch transaction metrics:", error);
+      throw new Error("Failed to fetch transaction metrics");
+    }
+  };

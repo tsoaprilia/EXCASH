@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { saveTransaction } from '@/lib/transactions'; // Import the server-side function
 
 interface Product {
   id: string;
@@ -43,12 +42,23 @@ const TransactionDetail = () => {
     console.log('Submitting transaction with details:', { transactionDetails, nominalPayment: payment });
 
     try {
-      // Call the server-side function directly
-      const transaction = await saveTransaction(transactionDetails, payment);
+      // Call the API endpoint
+      const response = await fetch('/api/save-transaction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ transactionDetails, nominalPayment: payment }),
+      });
 
-      console.log('Transaction successful');
-      localStorage.removeItem('selectedProducts');
-      router.push('/history');
+      if (response.ok) {
+        console.log('Transaction successful');
+        localStorage.removeItem('selectedProducts');
+        router.push('/history');
+      } else {
+        const errorData = await response.json();
+        console.error('Transaction error:', errorData.error);
+      }
     } catch (error) {
       console.error('Transaction error:', error);
     }
@@ -58,12 +68,12 @@ const TransactionDetail = () => {
     <div className="flex-1 pt-20 ml-10 pl-60 mr-10">
       <h1 className="mb-10 font-bold text-2xl">TRANSACTION DETAIL</h1>
       <table className="w-full table-auto border-collapse">
-    <thead className="text-sm text-gray-700 uppercase border-b border-gray-300">
+        <thead className="text-sm text-gray-700 uppercase border-b border-gray-300">
           <tr>
-          <th className="py-3 px-6 text-left">Product</th>
-      <th className="py-3 px-6 text-left">Quantity</th>
-      <th className="py-3 px-6 text-left">Price</th>
-      <th className="py-3 px-6 text-left">Total</th>
+            <th className="py-3 px-6 text-left">Product</th>
+            <th className="py-3 px-6 text-left">Quantity</th>
+            <th className="py-3 px-6 text-left">Price</th>
+            <th className="py-3 px-6 text-left">Total</th>
           </tr>
         </thead>
         <tbody>
