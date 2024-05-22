@@ -57,7 +57,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <SignedOut>
-            <div className="flex flex-col items-center justify-center h-screen bg-black text-white">
+            <div className="flex flex-col items-center justify-center h-screen bg-[url('/custom.png')] bg-cover text-white">
               <h3 className="text-4xl font-bold mb-4">EXCASH</h3>
               <p className="text-lg mb-2">Simpel, Cepat, dan Bergaya</p>
               <p className="text-lg mb-12">Aplikasi Kasir Modern untuk Bisnis Anda</p>

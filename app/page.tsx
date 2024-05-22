@@ -8,6 +8,7 @@ return (
   <div className="flex">
     <Sidebar></Sidebar>
     <div className="flex-1">
+      <Dashboard/>
     </div>
   </div>
 );

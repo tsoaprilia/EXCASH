@@ -22,7 +22,7 @@ const Sidebar = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                   </svg>
                 </button>
-                <a href="https://flowbite.com" className="flex ms-2 md:me-12">
+                <a href="/" className="flex ms-2 md:me-12">
                   {/* <img
                     src="https://flowbite.com/docs/images/logo.svg"
                     className="h-8 me-3"
