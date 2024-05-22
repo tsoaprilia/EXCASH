@@ -12,15 +12,15 @@ const ProductTable = async ({ query, currentPage }: { query: string; currentPage
     <table className="w-full table-auto border-collapse">
     <thead className="text-sm text-gray-700 uppercase border-b border-gray-300">
         <tr>
-          <th className="py-3 px-6">#</th>
-          <th className="py-3 px-6">Image</th>
-          <th className="py-3 px-6">Name</th>
-          <th className="py-3 px-6">Deskripsi</th>
-          <th className="py-3 px-6">Price</th>
-          <th className="py-3 px-6">Stock</th>
-          <th className="py-3 px-6">Create_At</th>
-          <th className="py-3 px-6 text-center">Actions</th>
-          <th className="py-3 px-6">Quantity</th>
+          <th className="py-3 px-6 text-left">#</th>
+          <th className="py-3 px-6 text-left">Image</th>
+          <th className="py-3 px-6 text-left">Name</th>
+          <th className="py-3 px-6 text-left">Deskripsi</th>
+          <th className="py-3 px-6 text-left">Price</th>
+          <th className="py-3 px-6 text-left">Stock</th>
+          <th className="py-3 px-6 text-left">Create_At</th>
+          <th className="py-3 px-6 text-left">Actions</th>
+          <th className="py-3 px-6 text-left">Quantity</th>
         </tr>
       </thead>
       <tbody>
@@ -36,7 +36,7 @@ const ProductTable = async ({ query, currentPage }: { query: string; currentPage
             <td className="py-3 px-6">{product.description}</td>
             <td className="py-3 px-6">{product.price}</td>
             <td className="py-3 px-6">{product.stock}</td>
-            <td className="py-3 px-6">{formatDate(product.createAt.toString())}</td>
+            <td className="py-3 px-6 font-size-12">{formatDate(product.createAt.toString())}</td>
             <td className="flex justify-center gap-1 py-3">
               <EditButton id={product.id} />
               <DeleteButton id={product.id} />

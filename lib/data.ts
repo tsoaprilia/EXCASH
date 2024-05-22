@@ -138,16 +138,16 @@ export const getProductMetrics = async () => {
     }
   };
   
-  export const getTransactionMetrics = async () => {
-    try {
-      const response = await fetch('/api/getTransactionMetrics');
-      if (!response.ok) {
-        throw new Error('Failed to fetch transaction metrics');
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Failed to fetch transaction metrics:", error);
-      throw new Error("Failed to fetch transaction metrics");
-    }
-  };
+//   export const getTransactionMetrics = async () => {
+//     try {
+//       const response = await fetch('/api/getTransactionMetrics');
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch transaction metrics');
+//       }
+//       const data = await response.json();
+//       return data;
+//     } catch (error) {
+//       console.error("Failed to fetch transaction metrics:", error);
+//       throw new Error("Failed to fetch transaction metrics");
+//     }
+//   };
