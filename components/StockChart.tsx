@@ -27,7 +27,7 @@ const StockChart = () => {
   return (
     <div className="bg-white p-5 rounded-md border border-gray-300">
     <h2 className="text-xl font-bold mb-5">Product Stock Chart</h2>
-    <BarChart width={600} height={300} data={products}>
+    <BarChart width={480} height={250} data={products}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="nameProduct" />
       <YAxis />

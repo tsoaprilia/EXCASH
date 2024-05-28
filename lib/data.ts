@@ -83,25 +83,65 @@ export const getProductsPages = async (query: string) =>{
 
 
 
-export const getTransactionRecords = async () => {
-  try {
+// export const getTransactionRecords = async () => {
+//   try {
+//       const transactions = await prisma.transactionRecord.findMany({
+//           include: {
+//               transactionDetails: {
+//                   include: {
+//                       product: true,
+//                   },
+//               },
+//           },
+//       });
+//       return transactions.map(transaction => ({
+//           ...transaction,
+//           total: transaction.transactionDetails.reduce((acc, item) => acc + item.quantity * item.price, 0),
+//       }));
+//   } catch (error) {
+//       throw new Error("Failed to fetch transaction records");
+//   }
+// };
+
+// Update the existing function in your data fetching module
+
+export const getTransactionRecords = async (query: string = '') => {
+    try {
       const transactions = await prisma.transactionRecord.findMany({
-          include: {
+        where: {
+          OR: [
+            {
               transactionDetails: {
-                  include: {
-                      product: true,
+                some: {
+                  product: {
+                    nameProduct: {
+                      contains: query,
+                      mode: 'insensitive',
+                    },
                   },
+                },
               },
+            },
+          ],
+        },
+        include: {
+          transactionDetails: {
+            include: {
+              product: true,
+            },
           },
+        },
       });
       return transactions.map(transaction => ({
-          ...transaction,
-          total: transaction.transactionDetails.reduce((acc, item) => acc + item.quantity * item.price, 0),
+        ...transaction,
+        total: transaction.transactionDetails.reduce((acc, item) => acc + item.quantity * item.price, 0),
       }));
-  } catch (error) {
+    } catch (error) {
       throw new Error("Failed to fetch transaction records");
-  }
-};
+    }
+  };
+  
+
   // export const getTransactionRecords = async () => {
   //   try {
   //     const transactions = await prisma.transactionRecord.findMany({
@@ -138,16 +178,17 @@ export const getProductMetrics = async () => {
     }
   };
   
-//   export const getTransactionMetrics = async () => {
-//     try {
-//       const response = await fetch('/api/getTransactionMetrics');
-//       if (!response.ok) {
-//         throw new Error('Failed to fetch transaction metrics');
-//       }
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       console.error("Failed to fetch transaction metrics:", error);
-//       throw new Error("Failed to fetch transaction metrics");
-//     }
-//   };
+  export const getTransactionMetrics = async () => {
+    try {
+      const response = await fetch('/api/getTransactionMatrics');
+      if (!response.ok) {
+        throw new Error('Failed to fetch transaction matrics');
+      }
+      const data = await response.json();
+      console.log(data); // Add this line to debug the fetched data
+      return data;
+    } catch (error) {
+      console.error("Failed to fetch transaction metrics:", error);
+      throw new Error("Failed to fetch transaction metrics");
+    }
+  };
