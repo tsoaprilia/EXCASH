@@ -44,7 +44,9 @@ const TransactionHistory = async () => {
               <td className="py-3 px-6">{transaction.change}</td>
               <td className="py-3 px-6">{new Date(transaction.createdAt).toLocaleString()}</td>
               <td className="py-3 px-6">
-                <Link href={`/history/detail/${transaction.id}`}>Show Detail</Link>
+                <Link href={`/history/detail/${transaction.id}`} className="text-blue-500">
+                  Show Detail
+                </Link>
               </td>
             </tr>
           ))}

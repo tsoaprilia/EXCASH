@@ -27,13 +27,13 @@ const TransactionDetail = ({ transaction }: { transaction: any }) => {
           <p className="text-Black-700"><strong>Date:</strong> {formattedDate}</p>
         </div>
         <div className="mb-2">
-          <p className="text-Black-700"><strong>Total:</strong> ${transaction.total.toFixed(2)}</p>
+          <p className="text-Black-700"><strong>Total:</strong> Rp. {transaction.total.toFixed(2)}</p>
         </div>
         <div className="mb-2">
-          <p className="text-Black-700"><strong>Nominal Payment:</strong> ${transaction.nominalPayment.toFixed(2)}</p>
+          <p className="text-Black-700"><strong>Nominal Payment:</strong> Rp. {transaction.nominalPayment.toFixed(2)}</p>
         </div>
         <div className="mb-2">
-          <p className="text-Black-700"><strong>Change:</strong> ${transaction.change.toFixed(2)}</p>
+          <p className="text-Black-700"><strong>Change:</strong> Rp. {transaction.change.toFixed(2)}</p>
         </div>
       </div>
       <div>
@@ -43,7 +43,7 @@ const TransactionDetail = ({ transaction }: { transaction: any }) => {
             <li key={index} className="bg-gray-100 p-4 rounded-lg shadow-sm">
               <div className="flex justify-between items-center">
                 <p className="text-gray-700">{detail.product.nameProduct}</p>
-                <p className="text-gray-700">${detail.price.toFixed(2)} x {detail.quantity}</p>
+                <p className="text-gray-700">Rp. {detail.price.toFixed(2)} x {detail.quantity}</p>
               </div>
             </li>
           ))}
