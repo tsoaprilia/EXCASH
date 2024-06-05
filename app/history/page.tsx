@@ -1,5 +1,6 @@
 // /pages/history.tsx
 import { getTransactionRecords } from '@/lib/data';
+import Link from 'next/link';
 
 const TransactionHistory = async () => {
   const transactions = await getTransactionRecords();
@@ -7,7 +8,7 @@ const TransactionHistory = async () => {
   return (
     <div className="flex-1 pt-20 ml-10 pl-60 mr-6">
       <h1 className="mb-10 font-bold text-2xl">TRANSACTION</h1>
-      
+
       <table className="w-full table-auto border-collapse">
         <thead className="text-sm text-gray-700 uppercase border-b border-gray-300">
           <tr>
@@ -18,6 +19,7 @@ const TransactionHistory = async () => {
             <th className="py-3 px-6 text-left">Payment</th>
             <th className="py-3 px-6 text-left">Change</th>
             <th className="py-3 px-6 text-left">Date</th>
+            <th className="py-3 px-6 text-left">Show Detail</th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +43,9 @@ const TransactionHistory = async () => {
               <td className="py-3 px-6">{transaction.nominalPayment}</td>
               <td className="py-3 px-6">{transaction.change}</td>
               <td className="py-3 px-6">{new Date(transaction.createdAt).toLocaleString()}</td>
+              <td className="py-3 px-6">
+                <Link href={`/history/detail/${transaction.id}`}>Show Detail</Link>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -192,3 +192,23 @@ export const getProductMetrics = async () => {
       throw new Error("Failed to fetch transaction metrics");
     }
   };
+
+  export const getTransactionById = async (id: string) => {
+    try {
+      const transaction = await prisma.transactionRecord.findUnique({
+        where: { id },
+        include: {
+          transactionDetails: {
+            include: {
+              product: true,
+            },
+          },
+        },
+      });
+  
+      return transaction;
+    } catch (error) {
+      console.error('Error fetching transaction by id:', error);
+      return null;
+    }
+  };
